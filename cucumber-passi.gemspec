@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "cucumber-passo/version"
+require "cucumber-passi/version"
 
 Gem::Specification.new do |s|
-  s.name        = "cucumber-passo"
-  s.version     = Cucumber::Passo::VERSION
+  s.name        = "cucumber-passi"
+  s.version     = Cucumber::Passi::VERSION
   s.authors     = ["Matt Scilipoti"]
   s.email       = ["matt@scilipoti.name"]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
 
-  s.rubyforge_project = "cucumber-passo"
+  s.rubyforge_project = "cucumber-passi"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

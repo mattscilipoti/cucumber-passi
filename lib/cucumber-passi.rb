@@ -1,7 +1,7 @@
-require "cucumber-passo/version"
+require "cucumber-passi/version"
 
 module Cucumber
-  module Passo
+  module Passi
     # Your code goes here...
   end
 end
