@@ -1,14 +1,21 @@
 require 'minitest/autorun'
+
 require File.expand_path('../lib/cucumber-passi/support/model_step_helper', File.dirname(__FILE__))
 
-describe "model_step_helper" do
+describe 'Passi::Helpers' do
+  before do
+    class CUT #Class Under Test
+      extend Passi::Helpers
+    end
+  end
+
   describe 'generate_model,' do
     describe "with no attributes," do
       it "should generate the model using a Factory" do
         #TODO: use the pattern like a before filter
         Factory = MiniTest::Mock.new
         Factory.expect(:create, nil, [:any_model, {}])
-        generate_model(:any_model)
+        CUT.generate_model(:any_model)
       end
     end
 
@@ -16,7 +23,7 @@ describe "model_step_helper" do
       it "should pass those attributes to Factory (with stringified keys)" do
         Factory = MiniTest::Mock.new
         Factory.expect(:create, nil, [:any_model, {'title' => 'TITLE'}])
-        generate_model(:any_model, :title => 'TITLE')
+        CUT.generate_model(:any_model, :title => 'TITLE')
       end
     end
 
