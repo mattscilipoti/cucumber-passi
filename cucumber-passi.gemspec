@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Matt Scilipoti"]
   s.email       = ["matt@scilipoti.name"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Collection of helper methods and step definitions for cucumber.}
+  s.description = %q{Collection of helper methods and step definitions for cucumber.}
 
   s.rubyforge_project = "cucumber-passi"
 
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'activesupport'
+  s.add_dependency 'cucumber'
+  s.add_dependency 'factory_girl'
   s.add_dependency 'i18n'
 
   s.add_development_dependency 'rake'
