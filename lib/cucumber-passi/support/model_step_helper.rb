@@ -12,18 +12,22 @@ module Passi
     def generate_model(factory_name, model_attributes = {})
       model_attributes.stringify_keys!
       tags = model_attributes.delete('tags')
+      features = model_attributes.delete('features')
       folders = model_attributes.delete('folders')
 
       new_model = Factory.create(factory_name, model_attributes)
 
       # association columns
-      unless tags.blank?
-        tags.split(',').each { |tag| new_model.tags << Factory.create(:tag, :title => tag.strip) }
+      unless features.blank?
+        features.split(',').each { |feature_title| new_model.features.create(Factory.attributes_for(:feature, :title => feature_title.strip)) }
       end
-      #  unless folders.blank?
-      #    folders.split(',').each { |folder_name| new_model.folders << Factory.create(:folder, :folder_name => folder_name.strip) }
-      #  end
-
+      unless folders.blank?
+        folders.split(',').each { |folder_name| new_model.folders.create(Factory.attributes_for(:folder, :folder_name => folder_name.strip)) }
+      end
+      unless tags.blank?
+        tags.split(',').each { |tag| new_model.tags.create(Factory.attributes_for(:tag, :title => tag.strip)) }
+      end
+      instance_variable_set("@#{new_model.class.name.underscore}", new_model)
       return new_model
     end
   end
