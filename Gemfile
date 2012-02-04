@@ -4,7 +4,8 @@ source "http://rubygems.org"
 gemspec
 
 group :development, :test do
-  gem 'ruby-debug19', :platforms => :mri_19
+  gem 'awesome_print'
+  gem 'ruby-debug19', :platforms => :mri_19, :require => 'ruby-debug'
     # as of 02/12 must name rubydebug-19 dependencies
     # install w/
     #     $ bash < <(curl -L https://raw.github.com/gist/1333785)
