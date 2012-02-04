@@ -1,7 +1,7 @@
 require 'active_support/core_ext/hash'
 
 module Passi
-  module Helpers
+  module StepHelpers
     # Depends: factory_girl (for rails 2.x),
     #          factory_girl_rails (for rails 3.x)
 

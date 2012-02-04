@@ -1,3 +1,4 @@
+module Passi::StepHelpers
 def find_label(value)
   page.all(:css, 'label').detect { |label| label.text == value }
 end
@@ -14,6 +15,7 @@ end
 def requested_model_pattern
   %{([^: ]+):([^:]+)}
 end
+end
 
 # Single-line step scoper
 # Using [^:] in last group to support multi-line scoper
@@ -24,27 +26,26 @@ end
 #   When I follow "Edit" within "#project_1"
 # Usage:
 #   When /^I follow "([^"]*)" for Project:ProjA$/ do |arg1|
-When /^I (follow|press) "([^"]+)" for #{requested_model_pattern}$/ do |action, field, model_name, record_identifier|
-  # TODO: convert requested_model_pattern into a Transform?
-  model = model_name.classify.constantize
-
-  mut = model.send(default_finder(model), record_identifier)
-  model_selector = '#' + dom_id(mut)
-  step %{I #{action} "#{field}" within "#{model_selector}"}
-end
+#When /^I (follow|press) "([^"]+)" for #{requested_model_pattern}$/ do |action, field, model_name, record_identifier|
+#  # TODO: convert requested_model_pattern into a Transform?
+#  model = model_name.classify.constantize
+#
+#  mut = model.send(default_finder(model), record_identifier)
+#  model_selector = '#' + dom_id(mut)
+#  step %{I #{action} "#{field}" within "#{model_selector}"}
+#end
 
 # Alias for 'Then I should be on'
 Then /^I should be viewing (.+)$/ do |page_name|
   step %(I should be on #{page_name})
 end
 
-# Alias for 'Then I should be on'
+# Alias for 'Then I should be on the edit page for'
 Then /^I should be editing (.+)$/ do |page_name|
   step %(I should be on the "edit" page for #{page_name})
 end
 
 Then /^I should see the following:$/ do |table|
-
   table.rows_hash.each do |field, value|
     label = find_label(field)
     raise "Could not find label '#{field}'" unless label

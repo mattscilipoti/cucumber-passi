@@ -2,10 +2,10 @@ require 'minitest/autorun'
 
 require File.expand_path('../lib/cucumber-passi/support/model_step_helper', File.dirname(__FILE__))
 
-describe 'Passi::Helpers' do
+describe 'Passi::StepHelpers' do
   before do
     class CUT #Class Under Test
-      extend Passi::Helpers
+      extend Passi::StepHelpers
     end
   end
 
