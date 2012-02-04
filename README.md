@@ -13,10 +13,21 @@ These steps are used daily in existing projects.
 Usage:
 ======
     $ require 'cucumber-passi/step_definitions'
+    $ require 'cucumber-passi/step_definitions/rails'
+    $ require 'cucumber-passi/step_definitions/active_record'
+
+
+Detesteable?
+============
+
+(adj.) offensive to the mind
+(adj.) that which is not tested
+
+These steps and helpers were extracted from existing projects.  They will live in the detestable dir until they have tests.
+
 
 Conventions:
 ============
-
 
 Specific Instance Naming Convention:
 ------------------------------------
