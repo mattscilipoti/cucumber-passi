@@ -1,23 +1,19 @@
 module Passi::StepHelpers
-def find_label(value)
-  page.all(:css, 'label').detect { |label| label.text == value }
-end
-
-def default_finder(model)
-  if model == Email
-    :find_by_subject
-  else
-    :find_by_title
+  def find_label(value)
+    page.all(:css, 'label').detect { |label| label.text == value }
   end
-end
 
-def requested_model_pattern
-  %{([^: ]+):([^:]+)}
-end
+  def default_finder(model)
+    if model == Email
+      :find_by_subject
+    else
+      :find_by_title
+    end
+  end
 
-When /^I click "([^"]*)"$/ do |locator|
-  click_link_or_button(locator)
-end
+  def requested_model_pattern
+    %{([^: ]+):([^:]+)}
+  end
 end
 
 # Single-line step scoper
@@ -109,6 +105,10 @@ Then /^"([^"]*)" should contain "([^"]*)"$/ do |requested_fieldset, value|
   within "fieldset##{fieldset_id}" do
     page.should have_css('span', value)
   end
+end
+
+When /^I click "([^"]*)"$/ do |locator|
+  click_link_or_button(locator)
 end
 
 # Alias to 'When I am on'
