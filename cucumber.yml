@@ -1,0 +1,18 @@
+<%
+require 'fuubar-cucumber'
+default_format_multi  = "--format #{ENV['CUCUMBER_FORMAT'] || 'fuubar'}"
+default_format_single = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
+
+html_report_options = " --format html --out='public/reports/features.html'"
+
+rerun_file = File.join('tmp', 'rerun.txt')
+rerun = File.file?(rerun_file) ? IO.read(rerun_file) : ""
+rerun_opts = rerun.to_s.strip.empty? ? "#{default_format_multi} features" : "#{default_format_single} #{rerun}"
+
+std_opts = "#{default_format_multi} --strict --tags ~@wip --tags ~@demo" #{html_report_options}"
+%>
+rerun: <%= rerun_opts %> --format rerun --out <%= rerun_file %> --strict --tags ~@wip
+default: <%= std_opts %> features
+demo: --tags @demo features
+wip: --tags @wip:3 --wip features
+html_report: <%=default_format_multi %> <%=html_report_options %> features
