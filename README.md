@@ -1,3 +1,5 @@
+NOTE:  These libraries are NOT READY FOR PRIME TIME!
+
 cucumber-passi: cucumber steps
 ===============
 
@@ -6,14 +8,29 @@ passi? http://translate.google.com/#auto|it|steps
 A collection of helper methods and reusable steps for cucumber[http://cukes.info]: the
 acceptance testing library.
 
-Since some of these helpers are opinionated, we have tried to allow you to pick and choose which sets to use.
 
-These steps are used daily in existing projects.
+NOTE:  These libraries are NOT READY FOR PRIME TIME!
+These steps are extacted from existing proojects.  They ARE used daily in existing projects, but portions are still specific to our conventions.  
+Once they are categorized and project specific items are extracted, they will be reusable.  Until that time, they are usable, but the difficulty probably outweighs the usefulnes.
+
 
 Usage:
 ======
+Since some of these helpers are opinionated, we have tried to allow you to pick and choose which sets to use.
+
+To utilize all the helpers (methods and step_definitions):
+    $ require 'cucumber-passi/all'
+
+To utilize all the step definitions:
     $ require 'cucumber-passi/step_definitions'
-    $ require 'cucumber-passi/step_definitions/rails'
+
+To only utilize the rails helpers (active_record +):
+    $ require 'cucumber-passi/rails'
+
+To only utilize the active_record helpers (included in 'rails' helpers):
+    $ require 'cucumber-passi/active_record'
+
+To only utilize the active_record *step_definitions*:
     $ require 'cucumber-passi/step_definitions/active_record'
 
 
