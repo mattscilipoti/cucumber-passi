@@ -1,6 +1,6 @@
 <%
 require 'fuubar-cucumber'
-default_format_multi  = "--format #{ENV['CUCUMBER_FORMAT'] || 'fuubar'}"
+default_format_multi  = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}" #fuubar
 default_format_single = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
 
 html_report_options = " --format html --out='public/reports/features.html'"
