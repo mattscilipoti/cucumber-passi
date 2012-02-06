@@ -4,8 +4,7 @@ def find_label(value)
 end
 
 def default_finder(model)
-  case model
-  when Email
+  if model == Email
     :find_by_subject
   else
     :find_by_title
@@ -14,6 +13,10 @@ end
 
 def requested_model_pattern
   %{([^: ]+):([^:]+)}
+end
+
+When /^I click "([^"]*)"$/ do |locator|
+  click_link_or_button(locator)
 end
 end
 
@@ -35,6 +38,15 @@ end
 #  step %{I #{action} "#{field}" within "#{model_selector}"}
 #end
 
+# Checks for in-line alert/error message
+# Usage:
+#   Then "Tag" should have an alert
+Then /^"([^"]*)" should have an alert$/ do |field|
+  field = find_field(field)
+  # find the sibling span.error for the found input
+  page.find("##{field[:id]} + span.error").should_not be_nil
+end
+
 # Alias for 'Then I should be on'
 Then /^I should be viewing (.+)$/ do |page_name|
   step %(I should be on #{page_name})
@@ -55,15 +67,28 @@ Then /^I should see the following:$/ do |table|
   end
 end
 
+Then /^I should not see any "([^"]*)" buttons$/ do |locator|
+  expect{find(:xpath, XPath::HTML.link_or_button(locator))}.to raise_error(Capybara::ElementNotFound)
+end
+
 Then /^should not see any alert[s]?$/ do
   page.should have_no_css('.alert')
 end
 
+Then /^I should not see any notifications$/ do
+  page.should have_no_css(".flash")
+end
+
+#EXPERIMENT: Toying with removing the ^I, so we can say I|we|they
+Then /should not see any (notice|alert)[s]?$/ do |level|
+  page.should have_no_css(".flash.#{level}")
+end
+
 Then /^I should see this alert "([^"]*)"$/ do |message|
   if message.blank?
-    I 'should not see any alerts'
+    step 'I should not see any alerts'
   else
-    I %{should see "#{message}" within ".alert"}
+    step %{I should see "#{message}" within ".alert"}
   end
 end
 
@@ -73,9 +98,9 @@ end
 
 Then /^I should see this notice "([^"]*)"$/ do |message|
   if message.blank?
-    I 'should not see any notices'
+    step 'I should not see any notices'
   else
-    I %{should see "#{message}" within ".notice"}
+    step %{I should see "#{message}" within ".notice"}
   end
 end
 
@@ -91,4 +116,12 @@ end
 #    When I am viewing the emails for Project:A
 When /^I am viewing (.+)$/ do |page_name|
   step %(I am on #{page_name})
+end
+
+Then /^I should( not)? see "([^"]*)" inside a dialog$/ do |negate, message|
+  step %(I should#{negate} see "#{message}" within ".dialog")
+end
+
+Then /^I should not see(?: an| the)? "([^"]*)" link$/ do |message|
+  page.should have_no_link(message)
 end
