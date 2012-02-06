@@ -1,7 +1,23 @@
 # Depends: factory_girl (for rails 2.x),
 #          factory_girl_rails (for rails 3.x)
-require 'cucumber'
-require 'factory_girl'
+begin
+  require 'factory_girl'
+rescue LoadError => need_factory_girl
+    $stderr.puts <<-EOS
+#{'*'*50}
+  Could not find the 'factory_girl' gem.
+  This is required for active_record related steps.
+  If you did not intend to use these steps, please specify the libraries you wish to use.
+
+  Otherwise:
+      gem install factory_girl #(for rails 2.x),
+  OR
+      gem install factory_girl_rails #(for rails 3.x)
+
+#{'*'*50}
+  EOS
+  exit(1)
+end
 
 module Passi::StepHelpers
 
