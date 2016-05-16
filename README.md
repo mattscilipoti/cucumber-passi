@@ -10,8 +10,8 @@ acceptance testing library.
 
 
 NOTE:  These libraries are NOT READY FOR PRIME TIME!
-These steps are extacted from existing proojects.  They ARE used daily in existing projects, but portions are still specific to our conventions.  
-Once they are categorized and project specific items are extracted, they will be reusable.  Until that time, they are usable, but the difficulty probably outweighs the usefulnes.
+These steps are extracted from existing projects.  They ARE used daily in existing projects, but portions are still specific to our conventions.  
+Once they are categorized and project specific items are extracted, they will be reusable.  Until that time, they are usable, but the difficulty probably outweighs the usefulness.
 
 
 Usage:

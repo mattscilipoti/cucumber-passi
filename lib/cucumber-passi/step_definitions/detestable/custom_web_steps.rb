@@ -12,7 +12,7 @@ module Passi::StepHelpers
   end
 
   def requested_model_pattern
-    %{([^: ]+):([^:]+)}
+    %{([^"]+) "([^"]+)"}
   end
 end
 
@@ -124,4 +124,14 @@ end
 
 Then /^I should not see(?: an| the)? "([^"]*)" link$/ do |message|
   page.should have_no_link(message)
+end
+
+Then /^the headline should (?:be|include) "([^"]*)"$/ do |headline|
+  within 'h1' do
+    if page.respond_to? :should
+      page.should have_content(headline)
+    else
+      assert page.has_content?(headline)
+    end
+  end
 end
